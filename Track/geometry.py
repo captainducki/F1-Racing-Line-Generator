@@ -12,11 +12,9 @@ def fit_spline(centerline: np.ndarray):
  
  
 def resample(tck, spacing_m: float) -> np.ndarray:
-    # Evaluate spline at 10000 points to get a dense version of the curve
     u_dense = np.linspace(0, 1, 10000)
     x_dense, y_dense = splev(u_dense, tck)
  
-    # Compute cumulative arc length along the dense curve
     points = np.stack([x_dense, y_dense], axis=1)
     diffs = np.diff(points, axis=0)
     seg_lengths = np.linalg.norm(diffs, axis=1)
@@ -24,13 +22,10 @@ def resample(tck, spacing_m: float) -> np.ndarray:
  
     total_length = arc_length[-1]
  
-    # Create evenly spaced distance values at spacing_m intervals
     distances = np.arange(0, total_length, spacing_m)
  
-    # Map those distances back to u parameter values
     u_uniform = np.interp(distances, arc_length, u_dense)
  
-    # Evaluate spline at those u values to get the resampled points
     x_resampled, y_resampled = splev(u_uniform, tck)
  
     return np.stack([x_resampled, y_resampled], axis=1)
