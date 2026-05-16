@@ -30,24 +30,6 @@ def resample(tck, spacing_m: float) -> np.ndarray:
  
     return np.stack([x_resampled, y_resampled], axis=1)
 
-def rotate_to_horizontal(centerline: np.ndarray) -> np.ndarray:
-    centroid = centerline.mean(axis=0)
-    centered = centerline - centroid
-
-    cov = np.cov(centered.T)
-    eigenvalues, eigenvectors = np.linalg.eigh(cov)
-
-    principal_axis = eigenvectors[:, np.argmax(eigenvalues)]
-
-    angle = -np.arctan2(principal_axis[1], principal_axis[0])
-
-    cos_a, sin_a = np.cos(angle), np.sin(angle)
-    rotation_matrix = np.array([[cos_a, -sin_a],[sin_a,  cos_a]])
-
-    rotated = (rotation_matrix @ centered.T).T
-
-    return rotated
-
  
 def compute_edges(centerline: np.ndarray, track_width_m: float):
     half_width = track_width_m / 2.0
