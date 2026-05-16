@@ -8,7 +8,7 @@ CIRCUITS = {
     "suzuka":      ("Japanese Grand Prix",       2023),
     "jeddah":      ("Saudi Arabian Grand Prix",  2023),
     "bahrain":     ("Bahrain Grand Prix",        2023),
-    "interlagos": ("São Paulo Grand Prix", 2023),  # last held 2017 but it is still in FastF1
+    "interlagos": ("São Paulo Grand Prix", 2023),
 }
 OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
  
