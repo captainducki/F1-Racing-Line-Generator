@@ -4,7 +4,7 @@ import os
  
 def load_centerline(circuit_name: str) -> np.ndarray:
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    csv_path = os.path.join(base_dir, "circuits", f"{circuit_name}.csv")
+    csv_path = os.path.join(base_dir, "Circuits", f"{circuit_name}.csv")
  
     if not os.path.exists(csv_path):
         raise FileNotFoundError(f"No CSV found for circuit '{circuit_name}'. Expected at: {csv_path}")
